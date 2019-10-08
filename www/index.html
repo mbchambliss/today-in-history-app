@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+	<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<title>Today in History</title>
+</head>
+
+<body >
+    <ons-page id="page1">
+        <div>
+            <div class="first-section">
+                <h1>Today in History</h1>
+                <div class="first-screen" id="clock">
+                	<i class="fas fa-history fa-9x"></i>
+                </div>
+                <h2>Discover Yesterday, <br />Today</h2>
+            </div>
+        </div>
+    </ons-page>
+
+    <ons-page id="page2">
+            <div class="first-screen" id="clock2">
+                <i class="fas fa-history fa-9x"></i>
+            </div>
+
+            <div>
+        	   <h1 id="sign-in">Sign In</h1>
+                <p class="login">
+                    <ons-input id="username" placeholder="Username" modifier="underbar"></ons-input>
+                    <ons-input id="password" placeholder="Password" modifier="underbar"></ons-input>
+                    <ons-button modifier="outline" style="color: #E32227; border-color: #E32227">Submit</ons-button>
+                    <ons-button modifier="outline" style="color: white; background-color: #E32227; border-color: #E32227">Sign Up</ons-button>
+                    <br/>
+                    <ons-button id="guest-button" modifier="outline" style="color: #E32227; border-color: #E32227">Continue as Guest</ons-button>
+                </p>
+            </div>
+    </ons-page>
+
+    <ons-page id="page3">
+        <h1>Page 3</h1>
+    </ons-page>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+
+</body>
+</html>
