@@ -94,7 +94,7 @@ h1 {
     padding-bottom: 4%;
 }
 
-#sign-in{
+#sign-in, #sign-up {
     padding-top: 5%;
 }
 
@@ -102,9 +102,14 @@ h1 {
     padding-bottom: 10%;
 }
 
-#guest-button{
+#guest-button {
     margin-top: 5%;
     width: 55%;
+}
+
+#backbutton {
+    margin-top: 5%;
+    margin-left: 3%;
 }
 
 .first-screen{

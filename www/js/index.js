@@ -31,6 +31,7 @@ var app = {
         this.receivedEvent('deviceready');
         hide_secondPage();
         hide_thirdPage();
+        hide_SignUp();
     },
 
     // Update DOM on a Received Event
@@ -47,6 +48,8 @@ app.initialize();
 function hide_secondPage(){
     var secondPage = document.getElementById('page2');
     secondPage.style.visibility = "hidden";
+    let guest = document.getElementById('guest-button').onclick = show_thirdPage;
+    let signUp = document.getElementById('sign-up-button').onclick = show_signUp;
 };
 
 function hide_thirdPage(){
@@ -54,15 +57,22 @@ function hide_thirdPage(){
     thirdPage.style.visibility = "hidden";
 };
 
-// function guest_click(){
-//     document.getElementById('guest-button').addEventListener('click', () => {
-//         show_thirdPage();
-// };
-
 function show_thirdPage(){
     hide_secondPage();
     var thirdPage = document.getElementById('page3');
     thirdPage.style.visibility = "visible";
+};
+
+function show_signUp(){
+    hide_secondPage();
+    var sign_up = document.getElementById('signUpPage');
+    sign_up.style.visibility = "visible";
+    let backbutton = document.getElementById('backbutton').onclick = onBackKeyDown;
+};
+
+function hide_SignUp(){
+    var signUpPage = document.getElementById('signUpPage');
+    signUpPage.style.visibility = "hidden";
 };
 
 function hide_firstPage(){
@@ -75,3 +85,8 @@ function show_secondPage(){
     var secondPage = document.getElementById('page2');
     secondPage.style.visibility = "visible";
 };
+
+function onBackKeyDown() {
+    hide_SignUp();
+    show_secondPage();
+}
