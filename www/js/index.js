@@ -48,8 +48,6 @@ app.initialize();
 function hide_secondPage(){
     var secondPage = document.getElementById('page2');
     secondPage.style.visibility = "hidden";
-    let guest = document.getElementById('guest-button').onclick = show_thirdPage;
-    let signUp = document.getElementById('sign-up-button').onclick = show_signUp;
 };
 
 function hide_thirdPage(){
@@ -58,32 +56,43 @@ function hide_thirdPage(){
 };
 
 function show_thirdPage(){
-    hide_secondPage();
-    var thirdPage = document.getElementById('page3');
+    let secondPage = document.getElementById('page2');
+    let sign_up = document.getElementById('signUpPage');
+    if(secondPage.style.visibility === "visible"){
+        hide_secondPage();
+    }
+    else if(sign_up.style.visibility === "visible"){
+        hide_SignUp();
+    }
+    let thirdPage = document.getElementById('page3');
     thirdPage.style.visibility = "visible";
 };
 
+//the onclick to show_thirdPage doesn't work -- WHY?!
 function show_signUp(){
     hide_secondPage();
-    var sign_up = document.getElementById('signUpPage');
+    let sign_up = document.getElementById('signUpPage');
     sign_up.style.visibility = "visible";
     let backbutton = document.getElementById('backbutton').onclick = onBackKeyDown;
+    let guestSubmit = document.getElementById('sign-up-button').onclick = show_thirdPage;
 };
 
 function hide_SignUp(){
-    var signUpPage = document.getElementById('signUpPage');
-    signUpPage.style.visibility = "hidden";
+    let sign_up = document.getElementById('signUpPage');
+    sign_up.style.visibility = "hidden";
 };
 
 function hide_firstPage(){
-    var firstPage = document.getElementById('page1');
+    let firstPage = document.getElementById('page1');
     firstPage.style.visibility = "hidden";
 };
 
 function show_secondPage(){
     hide_firstPage();
-    var secondPage = document.getElementById('page2');
+    let secondPage = document.getElementById('page2');
     secondPage.style.visibility = "visible";
+    let guest = document.getElementById('guest-button').onclick = show_thirdPage;
+    let signUp = document.getElementById('sign-up-button').onclick = show_signUp;
 };
 
 function onBackKeyDown() {
