@@ -17,85 +17,53 @@
  * under the License.
  */
 
-var app = {
-    // Application Constructor
-    initialize: function() {
-        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
-    },
+// var app = {
+//     // Application Constructor
+//     initialize: function() {
+//         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+//     },
 
     // deviceready Event Handler
     //
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
-    onDeviceReady: function() {
-        this.receivedEvent('deviceready');
-        hide_secondPage();
-        hide_thirdPage();
-        hide_SignUp();
-    },
+    // onDeviceReady: function() {
+    //     this.receivedEvent('deviceready');
+document.addEventListener('init', function(event) {
+    // setTimeout(function() {
+    //     show_secondPage(); }, 2500);
+  var page = event.target;
 
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        console.log('Received Event: ' + id);
-        console.log('App is ready!');
-        setTimeout(function() {
-            show_secondPage(); }, 2000);
+  if (page.id === 'page1') {
+    let eventpg = page.querySelector('#guest-button').onclick = function() {
+      document.querySelector('#myNavigator').pushPage('events.html');
+    };
+
+    let signuppg = page.querySelector('#sign-up-button').onclick = function() {
+      document.querySelector('#myNavigator').pushPage('signup.html');
+    };
+  } else if (page.id === 'page3') {
+        page.querySelector('#favorite-btn').onclick = function() {
+            document.querySelector('#myNavigator').pushPage('favorite.html');
+        };
     }
+});
+
+window.fn = {};
+
+window.fn.open = function() {
+  var menu = document.getElementById('menu');
+  menu.open();
 };
 
-app.initialize();
-
-function hide_secondPage(){
-    var secondPage = document.getElementById('page2');
-    secondPage.style.visibility = "hidden";
+window.fn.load = function(page) {
+  var content = document.getElementById('content');
+  var menu = document.getElementById('menu');
+  content.load(page)
+    .then(menu.close.bind(menu));
 };
+//     }
+// };
 
-function hide_thirdPage(){
-    var thirdPage = document.getElementById('page3');
-    thirdPage.style.visibility = "hidden";
-};
+// app.initialize();
 
-function show_thirdPage(){
-    let secondPage = document.getElementById('page2');
-    let sign_up = document.getElementById('signUpPage');
-    if(secondPage.style.visibility === "visible"){
-        hide_secondPage();
-    }
-    else if(sign_up.style.visibility === "visible"){
-        hide_SignUp();
-    }
-    let thirdPage = document.getElementById('page3');
-    thirdPage.style.visibility = "visible";
-};
-
-//the onclick to show_thirdPage doesn't work -- WHY?!
-function show_signUp(){
-    hide_secondPage();
-    let sign_up = document.getElementById('signUpPage');
-    sign_up.style.visibility = "visible";
-    let backbutton = document.getElementById('backbutton').onclick = onBackKeyDown;
-    let guestSubmit = document.getElementById('sign-up-button').onclick = show_thirdPage;
-};
-
-function hide_SignUp(){
-    let sign_up = document.getElementById('signUpPage');
-    sign_up.style.visibility = "hidden";
-};
-
-function hide_firstPage(){
-    let firstPage = document.getElementById('page1');
-    firstPage.style.visibility = "hidden";
-};
-
-function show_secondPage(){
-    hide_firstPage();
-    let secondPage = document.getElementById('page2');
-    secondPage.style.visibility = "visible";
-    let guest = document.getElementById('guest-button').onclick = show_thirdPage;
-    let signUp = document.getElementById('sign-up-button').onclick = show_signUp;
-};
-
-function onBackKeyDown() {
-    hide_SignUp();
-    show_secondPage();
-}

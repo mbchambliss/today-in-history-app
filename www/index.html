@@ -9,25 +9,72 @@
 </head>
 
 <body >
-    <ons-page id="page1">
-        <div>
-            <div class="first-section">
-                <h1>Today in History</h1>
-                <div class="first-screen" id="clock">
-                	<i class="fas fa-history fa-9x"></i>
-                </div>
-                <h2>Discover Yesterday, <br />Today</h2>
-            </div>
-        </div>
-    </ons-page>
 
-    <ons-page id="page2">
+    <ons-splitter>
+      <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+        <ons-page>
+          <ons-list style="background-color: #E32227">
+<!--             <ons-list-item onclick="fn.load('home.html')" tappable>
+              Home
+            </ons-list-item> -->
+            <ons-list-item onclick="fn.load('favorite.html')" class="white-font" tappable>
+              Favorites
+            </ons-list-item>
+            <ons-list-item onclick="fn.load('events.html')" class="white-font" tappable>
+              Events
+            </ons-list-item>
+            <ons-list-item onclick="fn.load('account.html')" class="white-font" tappable>
+              Account
+            </ons-list-item>
+          </ons-list>
+        </ons-page>
+      </ons-splitter-side>
+      <ons-splitter-content id="content" page="signin.html"></ons-splitter-content>
+    </ons-splitter>
+
+
+    <template id="favorite.html">
+        <ons-page id="fav">
+            <ons-toolbar style="background-color: #E32227">
+              <div class="left">
+                <ons-toolbar-button class="white-font" onclick="fn.open()">
+                  <ons-icon icon="md-menu" class="center"></ons-icon>
+                </ons-toolbar-button>
+              </div>
+              <div class="center" style="color: white">Favorites
+              </div>
+                <div class="right">
+                    <ons-button modifier="noborder" style="color: white; background-color: #E32227"><i class="fas fa-user"></i></ons-button>
+                </div>
+            </ons-toolbar>
+            <img src="mlk.jpg" id="mlk2" />
+
+            <p id="mlk-text2">"I Have a Dream" is a public speech that was delivered by American civil rights activist Martin Luther King Jr. during the March on Washington...</p>
+        <div class="login">
+            <ons-button class="unfavorite-btn" modifier="outline" style="color: #E32227; border-color: #E32227"><i class="fas fa-heart-broken"></i> Unfavorite</ons-button>
+        </div>
+        </ons-page>
+    </template>
+
+
+    <template id="signin.html">
+        <ons-page id="page1">
+            <ons-toolbar style="background-color: #E32227">
+              <div class="left">
+                <ons-toolbar-button class="white-font" onclick="fn.open()">
+                  <ons-icon icon="md-menu"></ons-icon>
+                </ons-toolbar-button>
+              </div>
+              <div class="center" style="color: white">
+              </div>
+            </ons-toolbar>
+
             <div class="first-screen" id="clock2">
                 <i class="fas fa-history fa-9x"></i>
             </div>
 
             <div>
-        	   <h1 id="sign-in">Sign In</h1>
+               <h1 id="sign-in">Sign In</h1>
                 <p class="login">
                     <ons-input id="username" placeholder="Username" modifier="underbar"></ons-input>
                     <ons-input id="password" placeholder="Password" modifier="underbar"></ons-input>
@@ -37,33 +84,96 @@
                     <ons-button id="guest-button" modifier="outline" style="color: #E32227; border-color: #E32227">Continue as Guest</ons-button>
                 </p>
             </div>
-    </ons-page>
+        </ons-page>
+    </template>
 
-    <ons-page id="page3">
-        <!-- <ons-back-button id="backbutton" modifier="outline" style="color: #E32227; border-color: #E32227">Back</ons-back-button> -->
-        <h1>Today in History</h1>
-    </ons-page>
+    <template id="signup.html">
+        <ons-page id="signUpPage">
 
-    <ons-page id="signUpPage">
-        <ons-back-button id="backbutton" modifier="outline" style="color: #E32227; border-color: #E32227">Back</ons-back-button>
+            <ons-toolbar style="background-color: #E32227">
+              <div class="left">
+                <ons-toolbar-button class="white-font" onclick="fn.open()">
+                  <ons-icon icon="md-menu"></ons-icon>
+                </ons-toolbar-button>
+              </div>
+              <div class="center" style="color: white">
+              </div>
+            </ons-toolbar>
 
-        <div class="first-screen" id="clock2">
+<!--             <div class="left">
+                <ons-back-button id="backbutton" modifier="outline" style="color: #E32227; border-color:#E32227">Back</ons-back-button>
+            </div> -->
+
+            <div class="first-screen" id="clock2">
                 <i class="fas fa-history fa-9x"></i>
-        </div>
+            </div>
 
-        <div>
-               <h1 id="sign-up">Sign Up</h1>
+            <div>
+                <h1 id="sign-up">Sign Up</h1>
                 <p class="login">
                     <ons-input id="username" placeholder="Username" modifier="underbar"></ons-input>
                     <ons-input id="password" placeholder="Password" modifier="underbar"></ons-input>
-                    <ons-button id="sign-up-button" modifier="outline" style="color: white; background-color: #E32227; border-color: #E32227">Sign Up</ons-button>
-                    <br/>
+                    <ons-button id="sign-up-button" modifier="outline" style="color: white; background-color: #E32227; border-color: #E32227">Sign Up</ons-button><br/>
                 </p>
             </div>
-    </ons-page>
+        </ons-page>
+    </template>
+
+    <template id="events.html">
+        <ons-page id="page3">
+            <ons-toolbar style="background-color: #E32227">
+              <div class="left">
+                <ons-toolbar-button class="white-font" onclick="fn.open()">
+                  <ons-icon icon="md-menu"></ons-icon>
+                </ons-toolbar-button>
+              </div>
+              <div class="center" style="color: white">
+                Today in History
+              </div>
+                <div class="right">
+                    <ons-button modifier="noborder" style="color: white; background-color: #E32227"><i class="fas fa-user"></i></ons-button>
+                </div>
+            </ons-toolbar>
+<!--             <ons-toolbar style="background-color: #E32227">
+                <ons-toolbar-button>
+                    <ons-icon icon="md-menu" size="30px" style="color: white;"></ons-icon>
+                </ons-toolbar-button>
+                <div class="center" style="color: white;">Today in History</div>
+            </ons-toolbar> -->
+
+            <h3>MLK Jr. delivers "I Have <br/>A Dream" Speech</h3>
+            <img src="mlk.jpg" id="mlk" />
+
+            <p id="mlk-text">"I Have a Dream" is a public speech that was delivered by American civil rights activist Martin Luther King Jr. during the March on Washington for Jobs and Freedom on August 28, 1963, in which he called for civil and economic rights and an end to racism in the United States.</p>
+            <img src="mlk-video.png" id="mlk-video" />
+            <div class="login">
+                <ons-button class="favorite-btn" modifier="outline" style="color: #E32227; border-color: #E32227"><i class="far fa-heart"></i> Favorite</ons-button>
+            </div>
+        </ons-page>
+    </template>
+
+    <template id="account.html">
+        <ons-page id="account">
+            <ons-toolbar style="background-color: #E32227">
+              <div class="left">
+                <ons-toolbar-button class="white-font" onclick="fn.open()">
+                  <ons-icon icon="md-menu" class="center"></ons-icon>
+                </ons-toolbar-button>
+              </div>
+              <div class="center" style="color: white">Account
+              </div>
+            </ons-toolbar>
+            <div class="user">
+                <i class="fas fa-user-circle fa-10x" style="color: #E32227"></i>
+                <br/>
+                <h2 style="color: #E32227">USER NAME</h2>
+            </div>
+        </ons-page>
+    </template>
+
 
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/test.js"></script>
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
 
 </body>

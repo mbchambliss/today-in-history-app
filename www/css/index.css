@@ -67,9 +67,36 @@ body {
     display: inline-block;
 }
 
+.favorite-btn{
+    width: 45%;
+}
+
+.unfavorite-btn{
+    width: 45%;
+}
+
+.login2 {
+    text-align: center;
+}
+
+.white-font{
+    color: white;
+}
+
 h1 {
     font-family: vogue-font;
     font-size:30px;
+    font-weight:normal;
+    margin:0px;
+    overflow:visible;
+    padding:0px;
+    text-align:center;
+    color: #E32227;
+}
+
+h3 {
+    font-family: vogue-font;
+    font-size:20px;
     font-weight:normal;
     margin:0px;
     overflow:visible;
@@ -85,6 +112,11 @@ h1 {
 
 .login {
     text-align: center;
+}
+
+.user {
+    text-align: center;
+    margin-top: 15%;
 }
 
 #username, #password{
@@ -107,11 +139,17 @@ h1 {
     width: 55%;
 }
 
-#backbutton {
+#backbutton, #backbutton2 {
     margin-top: 5%;
     margin-left: 3%;
     color: #E32227;
 }
+
+#mlk, #mlk2, #mlk-text, #mlk-text2, #mlk-video {
+    width: 90%;
+    margin-left: 5%;
+}
+
 
 .first-screen{
     margin-left: 5%;
