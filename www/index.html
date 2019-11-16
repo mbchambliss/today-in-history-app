@@ -26,6 +26,9 @@
             <ons-list-item onclick="fn.load('account.html')" class="white-font" tappable>
               Account
             </ons-list-item>
+            <ons-list-item onclick="fn.load('signin.html')" class="white-font" tappable>
+              Sign In
+            </ons-list-item>
           </ons-list>
         </ons-page>
       </ons-splitter-side>
@@ -81,7 +84,7 @@
                     <ons-button modifier="outline" style="color: #E32227; border-color: #E32227">Submit</ons-button>
                     <ons-button id="sign-up-button" modifier="outline" style="color: white; background-color: #E32227; border-color: #E32227">Sign Up</ons-button>
                     <br/>
-                    <ons-button id="guest-button" modifier="outline" style="color: #E32227; border-color: #E32227">Continue as Guest</ons-button>
+                    <ons-button onclick="fn.load('events.html')" id="guest-button" modifier="outline" style="color: #E32227; border-color: #E32227">Continue as Guest</ons-button>
                 </p>
             </div>
         </ons-page>
@@ -131,7 +134,7 @@
                 Today in History
               </div>
                 <div class="right">
-                    <ons-button modifier="noborder" style="color: white; background-color: #E32227"><i class="fas fa-user"></i></ons-button>
+                    <ons-button onclick="fn.load('account.html')" modifier="noborder" style="color: white; background-color: #E32227"><i class="fas fa-user"></i></ons-button>
                 </div>
             </ons-toolbar>
 <!--             <ons-toolbar style="background-color: #E32227">
@@ -147,7 +150,7 @@
             <p id="mlk-text">"I Have a Dream" is a public speech that was delivered by American civil rights activist Martin Luther King Jr. during the March on Washington for Jobs and Freedom on August 28, 1963, in which he called for civil and economic rights and an end to racism in the United States.</p>
             <img src="mlk-video.png" id="mlk-video" />
             <div class="login">
-                <ons-button class="favorite-btn" modifier="outline" style="color: #E32227; border-color: #E32227"><i class="far fa-heart"></i> Favorite</ons-button>
+                <ons-button onclick="fn.myAlert()" id="favorite-btn" modifier="outline" style="color: #E32227; border-color: #E32227"><i class="far fa-heart"></i> Favorite</ons-button>
             </div>
         </ons-page>
     </template>
@@ -173,7 +176,7 @@
 
 
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/test.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
 
 </body>

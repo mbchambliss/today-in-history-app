@@ -1,52 +1,7 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-
-// var app = {
-//     // Application Constructor
-//     initialize: function() {
-//         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
-//     },
-
-    // deviceready Event Handler
-    //
-    // Bind any cordova events here. Common events are:
-    // 'pause', 'resume', etc.
-    // onDeviceReady: function() {
-    //     this.receivedEvent('deviceready');
 document.addEventListener('init', function(event) {
-    // setTimeout(function() {
-    //     show_secondPage(); }, 2500);
+
   var page = event.target;
 
-  if (page.id === 'page1') {
-    let eventpg = page.querySelector('#guest-button').onclick = function() {
-      document.querySelector('#myNavigator').pushPage('events.html');
-    };
-
-    let signuppg = page.querySelector('#sign-up-button').onclick = function() {
-      document.querySelector('#myNavigator').pushPage('signup.html');
-    };
-  } else if (page.id === 'page3') {
-        page.querySelector('#favorite-btn').onclick = function() {
-            document.querySelector('#myNavigator').pushPage('favorite.html');
-        };
-    }
 });
 
 window.fn = {};
@@ -57,13 +12,92 @@ window.fn.open = function() {
 };
 
 window.fn.load = function(page) {
+
+  if(page == "events.html"){
+    console.log("This is the events page!");
+
+    //set variable for IndexedDB support
+    var indexedDBSupport = false; //check IndexedDB support 
+    if("indexedDB" in window) {
+      indexedDBSupport = true;
+      console.log("IndexedDB supported...");
+    } else {
+    console.log("No support...");
+    } 
+
+    if(indexedDBSupport) {
+      var openDB = indexedDB.open("history_app", 1);
+      openDB.onupgradeneeded = function(e) {
+          console.log("DB upgrade...");
+          //local var for db upgrade
+          var upgradeDB = e.target.result;
+          if (!upgradeDB.objectStoreNames.contains("events")) {
+              upgradeDB.createObjectStore("events");
+              console.log("new object store created...");
+          }
+      }
+      
+      openDB.onsuccess = function(e) {
+          console.log("DB success...");
+
+          events_arr = [
+            {
+            title: "Test Title 1/3",
+            date: "05-01",
+            details: "This is test event #1 of 3"
+            },
+            {
+            title: "Test Title 2/3",
+            date: "05-02",
+            details: "This is test event #2 of 3"
+            },
+            {
+            title: "Test Title 3/3",
+            date: "05-03",
+            details: "This is test event #3 of 3"
+            }
+          ]
+
+          db = e.target.result;
+          var dbTransaction = db.transaction(["events"],"readwrite");
+          var dataStore = dbTransaction.objectStore("events");
+          var addRequest;
+
+          events_arr.forEach(event => {
+            addRequest = dataStore.add(event,event.date);
+          })
+
+          // success handler
+          addRequest.onsuccess = function(e) { 
+            console.log("data stored...");
+          }
+          // error handler
+          addRequest.onerror = function(e) { 
+            console.log(e.target.error.name); // handle error...
+          }
+      }
+      
+      openDB.onerror = function(e) {
+          console.log("DB error...");
+          console.dir(e);
+      }
+    }
+
+
+  }
+
+
+
+
   var content = document.getElementById('content');
   var menu = document.getElementById('menu');
   content.load(page)
     .then(menu.close.bind(menu));
 };
-//     }
-// };
 
-// app.initialize();
+window.fn.myAlert = function(){
+  var fav_btn = document.getElementById('favorite-btn');
+  alert("Added to favorites!");
+  fav_btn.innerHTML = "<i class='fas fa-heart-broken'></i> Unfavorite";
+}
 
