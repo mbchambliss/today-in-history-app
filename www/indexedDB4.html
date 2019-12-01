@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+<head>
+    <script type="text/javascript" src =
+    "http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+</head>
+
+<body>
+<!--I think this is where the stuff from the index.html file that you created goes???
+<h2>Event</h2>
+<input type="text" id="title" placeholder="Senate Republicans vote to impeach Trump"><br/>
+<input type="text" id="details" placeholder="Republicans in the US Senate voted with the democrats to impeach President Donald Trump with an overwhelming vote of 95 to 5."><br/>
+<input type="text" id="date" placeholder="4 December, 2019"><br/>-->
+
+<script>
+
+//check for support
+
+function idbOK() {
+    return "indexedDB" in window;
+}
+
+var db;
+
+$(document).ready(function() {
+
+    //No support? What to do?
+
+    if(!idbOK()) return;
+
+    var openRequest = indexedDB.open("history_app",1);
+
+    openRequest.onupgradeneeded = function(e) {
+        console.log("running onupgradeneeded");
+    }
+
+    openRequest.onsuccess = function(e) {
+        console.log("running onsuccess");
+        db = e.target.result;
+    }
+
+    openRequest.onerror = function(e) {
+        console.log("onerror!");
+        console.dir(e);
+    }
+
+});
+
+var openRequest = indexedDB.open("history_app",2);
+
+openRequest.onupgradeneeded = function(e) {
+    var thisDB = e.target.result;
+    console.log("running onupgradeneeded");
+//creeted object store, primary key will be automatically assigned as an incrementing number 
+
+    if(!thisDB.objectStoreNames.contains("events")) {
+    console.log("making a new object store");
+        var eventsOS = thisDB.createObjectStore("events",
+            {keypath:"id", autoIncrement:true});
+
+
+        eventsOS.createIndex("title", "title", {unique:false});
+        eventsOS.createIndex("details", "details", {unique:false});
+        eventsOS.createIndex("date", "date", {unique:false});     
+         }	
+
+    openRequest.onsuccess = function(e) {
+        console.log("running onsuccess");
+        db = e.target.result;
+        console.dir(db.objectStoreNames);
+    }
+
+    openRequest.onerror = function(e) {
+        console.log("onerror!");
+        console.dir(e);
+    };        
+	}
+
+    function addEvent(e) {
+    var title = $("#title").val();
+    var details = $("#details").val();
+    var date = $("#date").val();
+
+    console.log("About to add "+event+"/"+details+"/"+date);
+
+        //Get a transaction
+    //default for OS list is all, default for type is read
+    var transaction = db.transaction(["events"],"readwrite");
+    //Ask for the objectStore
+    var store = transaction.objectStore("events");
+
+/* 
+    //Define an event
+    var event = {
+        title:title,
+        details:details,
+       	date:date,
+    };*/
+
+    //NEW STUFF!!!
+
+    // Handling specific wrapper
+    var index = store.index("date");
+
+    // Handling specific date
+    var 
+
+
+    for(var i=0; i<365; i++){
+        store.add({title: "Killer fogs begin in London, England; the term 'Smog' is coined", details: "For five days in December 1952, the Great Smog of London smothered the city, wreaking havoc and killing thousands.", date: "December 4, 1952"})
+;        store.add({title: "Aircraft squadron lost in the Bermuda Triangle", details: "At 2:10 p.m., five U.S. Navy Avenger torpedo-bombers comprising Flight 19 take off from the Ft. Lauderdale Naval Air Station on a routine three-hour training mission. They never returned.", date: "December 5, 1945"});
+        store.add({title: "Starbucks opens its largest cafe in the world in Shanghai", details: "Called the Starbucks Roastery Shanghai, Starbucks' second Roastery measures an astounding 30,000 sq ft - that is almost half of a football field.", date: "December 6, 2017"});
+    }
+
+    //Perform the add
+    var request = store.add(event);
+
+    request.onerror = function(e) {
+        console.log("Error",e.target.error.name);
+        //some type of error handler
+    }
+
+    request.onsuccess = function(e) {
+        console.log("Woot! Did it");
+    }
+}
+
+function getEvent(e) {
+    var key = $("#getevent").val();
+    if(key === "") return;
+
+    // Creating Transaction
+    var transaction = db.transaction(["events"],"readonly");
+    // Handling Object Store
+    var store = transaction.objectStore("events");
+
+    var request = store.get(Number(key));
+
+    request.onsuccess = function(e) {
+        var result = e.target.result;
+        console.dir(result);    
+		$("#title").val(result.title);
+        $("#details").val(result.details);
+        $("#date").val(result.date);
+    }
+
+    request.onerror = function(e) {
+        console.log("Error");
+        console.dir(e); 
+  }       
+}
+
+</script>
+
+
+</body>
+</html>
