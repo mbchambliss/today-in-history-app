@@ -73,6 +73,13 @@ body {
 
 .unfavorite-btn{
     width: 45%;
+    color: #E32227; 
+    border-color: #E32227;
+}
+
+#unfavorite-btn, #unfavorite-btn2{
+    width: 45%;
+    display: none;
 }
 
 .login2 {
@@ -145,9 +152,13 @@ h3 {
     color: #E32227;
 }
 
-#mlk, #mlk2, #mlk-text, #mlk-text2, #mlk-video {
+#event-picture, .picture-center, .event-detail, #mlk2, #event-details, #mlk-text2, #event-video {
     width: 90%;
     margin-left: 5%;
+}
+
+#favorite-events-data{
+    text-align: center;
 }
 
 

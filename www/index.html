@@ -2,10 +2,10 @@
 
 <html>
 <head>
-	<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
-	<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
-	<link rel="stylesheet" type="text/css" href="css/index.css">
-	<title>Today in History</title>
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <title>Today in History</title>
 </head>
 
 <body >
@@ -14,9 +14,9 @@
       <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
         <ons-page>
           <ons-list style="background-color: #E32227">
-<!--             <ons-list-item onclick="fn.load('home.html')" tappable>
-              Home
-            </ons-list-item> -->
+            <ons-list-item class="white-font">
+              <i class="fas fa-history fa-2x" class="center"></i>
+            </ons-list-item>
             <ons-list-item onclick="fn.load('favorite.html')" class="white-font" tappable>
               Favorites
             </ons-list-item>
@@ -47,15 +47,16 @@
               <div class="center" style="color: white">Favorites
               </div>
                 <div class="right">
-                    <ons-button modifier="noborder" style="color: white; background-color: #E32227"><i class="fas fa-user"></i></ons-button>
+                    <ons-button modifier="noborder" style="color: white; background-color: #E32227" onclick="fn.load('account.html')"><i class="fas fa-user"></i></ons-button>
                 </div>
             </ons-toolbar>
-            <img src="mlk.jpg" id="mlk2" />
 
-            <p id="mlk-text2">"I Have a Dream" is a public speech that was delivered by American civil rights activist Martin Luther King Jr. during the March on Washington...</p>
-        <div class="login">
-            <ons-button class="unfavorite-btn" modifier="outline" style="color: #E32227; border-color: #E32227"><i class="fas fa-heart-broken"></i> Unfavorite</ons-button>
-        </div>
+          <div id="favorite-events-data">
+          </div>
+
+<!--           <div class="login">
+              <ons-button onclick="fn.removeFavorite()" id="unfavorite-btn2" modifier="outline" style="color: #E32227; border-color: #E32227"><i class='fas fa-heart-broken'></i> Unfavorite</ons-button>
+          </div> -->
         </ons-page>
     </template>
 
@@ -81,8 +82,8 @@
                 <p class="login">
                     <ons-input id="username" placeholder="Username" modifier="underbar"></ons-input>
                     <ons-input id="password" placeholder="Password" modifier="underbar"></ons-input>
-                    <ons-button modifier="outline" style="color: #E32227; border-color: #E32227">Submit</ons-button>
-                    <ons-button id="sign-up-button" modifier="outline" style="color: white; background-color: #E32227; border-color: #E32227">Sign Up</ons-button>
+                    <ons-button onclick="fn.onSubmit()" id="submit-login" modifier="outline" style="color: #E32227; border-color: #E32227">Submit</ons-button>
+                    <ons-button onclick="fn.load('signup.html')" id="sign-up-button" modifier="outline" style="color: white; background-color: #E32227; border-color: #E32227">Sign Up</ons-button>
                     <br/>
                     <ons-button onclick="fn.load('events.html')" id="guest-button" modifier="outline" style="color: #E32227; border-color: #E32227">Continue as Guest</ons-button>
                 </p>
@@ -144,13 +145,16 @@
                 <div class="center" style="color: white;">Today in History</div>
             </ons-toolbar> -->
 
-            <h3>MLK Jr. delivers "I Have <br/>A Dream" Speech</h3>
-            <img src="mlk.jpg" id="mlk" />
+            <h3 id="title">MLK Jr. delivers "I Have <br/>A Dream" Speech</h3>
 
-            <p id="mlk-text">"I Have a Dream" is a public speech that was delivered by American civil rights activist Martin Luther King Jr. during the March on Washington for Jobs and Freedom on August 28, 1963, in which he called for civil and economic rights and an end to racism in the United States.</p>
-            <img src="mlk-video.png" id="mlk-video" />
-            <div class="login">
-                <ons-button onclick="fn.myAlert()" id="favorite-btn" modifier="outline" style="color: #E32227; border-color: #E32227"><i class="far fa-heart"></i> Favorite</ons-button>
+<!--        <img src="mlk.jpg" id="event-picture" />
+ -->        <img src="" id="event-picture" />
+
+            <p id="event-details">"I Have a Dream" is a public speech that was delivered by American civil rights activist Martin Luther King Jr. during the March on Washington for Jobs and Freedom on August 28, 1963, in which he called for civil and economic rights and an end to racism in the United States.</p>
+            <div class="login" id="favoriteButton">
+                <ons-button onclick="fn.addToFavorites()" id="favorite-btn" modifier="outline" style="color: #E32227; border-color: #E32227"><i class="far fa-heart"></i> Favorite</ons-button>
+
+                <ons-button onclick="fn.removeFavorite()" id="unfavorite-btn" modifier="outline" style="color: #E32227; border-color: #E32227"><i class='fas fa-heart-broken'></i> Unfavorite</ons-button>
             </div>
         </ons-page>
     </template>
@@ -170,6 +174,7 @@
                 <i class="fas fa-user-circle fa-10x" style="color: #E32227"></i>
                 <br/>
                 <h2 style="color: #E32227">USER NAME</h2>
+                <ons-button onclick="fn.startLogout()" id="signoutBtn" modifier="outline" style="color: #E32227; border-color: #E32227">Sign Out</ons-button>
             </div>
         </ons-page>
     </template>
@@ -177,7 +182,20 @@
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+<!--     <script type="text/javascript" src="js/firebase-auth.js"></script>
+ --><!-- <script type="text/javascript" defer src="js/init-firebase.js"></script> -->
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-analytics.js"></script>
+
+    <!-- Added Firebase products -->
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-firestore.js"></script>
 
 </body>
 </html>
