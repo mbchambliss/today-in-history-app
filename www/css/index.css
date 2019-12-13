@@ -53,7 +53,7 @@ body {
 }
 
 #clock{
-    color: #E32227;
+    color: #9B2335;
     padding-top: 15%;
     height: 200px;
     text-align: center;
@@ -61,7 +61,7 @@ body {
 }
 
 #clock2{
-    color: #E32227;
+    color: #9B2335;
     height: 100px;
     text-align: center;
     display: inline-block;
@@ -73,8 +73,8 @@ body {
 
 .unfavorite-btn{
     width: 45%;
-    color: #E32227; 
-    border-color: #E32227;
+    color: #9B2335; 
+    border-color: #9B2335;
 }
 
 #unfavorite-btn, #unfavorite-btn2{
@@ -98,7 +98,7 @@ h1 {
     overflow:visible;
     padding:0px;
     text-align:center;
-    color: #E32227;
+    color: #9B2335;
 }
 
 h3 {
@@ -109,11 +109,11 @@ h3 {
     overflow:visible;
     padding:0px;
     text-align:center;
-    color: #E32227;
+    color: #9B2335;
 }
 
 .red-background{
-    border-color: #E32227;
+    border-color: #9B2335;
     height: 100vh;
 }
 
@@ -149,7 +149,7 @@ h3 {
 #backbutton, #backbutton2 {
     margin-top: 5%;
     margin-left: 3%;
-    color: #E32227;
+    color: #9B2335;
 }
 
 #event-picture, .picture-center, .event-detail, #mlk2, #event-details, #mlk-text2, #event-video {
@@ -180,6 +180,6 @@ h2 {
     margin:0px;
     padding:0px;
     text-align:center;
-    color: #E32227;
+    color: #9B2335;
 }
  
