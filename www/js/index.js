@@ -75,7 +75,7 @@ function onLoad() {
       } 
 
       if(indexedDBSupport) {
-        var openRequest = indexedDB.open("history_app", 1);
+        var openRequest = indexedDB.open("history_app", 2);
         var db;
         var date;
         
@@ -99,23 +99,24 @@ function onLoad() {
               date: "12-04",
               full_date: "December 4, 1952",
               details: "For five days in December 1952, the Great Smog of London smothered the city, wreaking havoc and killing thousands.",
-              picture: "../img/londonfog.jpg"
+              picture: "./img/londonfog.jpg"
               },
               {
               title: "Aircraft squadron lost in the Bermuda Triangle",
               date: "12-05",
               full_date: "December 5, 1945",
               details: "At 2:10 p.m., five U.S. Navy Avenger torpedo-bombers comprising Flight 19 take off from the Ft. Lauderdale Naval Air Station on a routine three-hour training mission. They never returned.",
-              picture: "../img/flight19.jpg"
+              picture: "./img/flight19.jpg"
               },
               {
               title: "Starbucks opens its largest cafe in the world in Shanghai",
               date: "12-06",
               full_date: "December 6, 2017",
               details: "Called the Starbucks Roastery Shanghai, Starbucks' second Roastery measures an astounding 30,000 sq ft - that is almost half of a football field.",
-              picture: "../img/starbucks_shanghai.jpg"
+              picture: "./img/starbucks_shanghai.jpg"
               }
             ];
+
             var dataStore = dbTransaction.objectStore("events");
             events_arr.forEach(event => {
               var addRequest = dataStore.add(event, event.date);
@@ -145,8 +146,8 @@ function onLoad() {
 
               //event picture
               var pic = document.getElementById('event-picture');
-              pic.src = request.result.picture;
-              console.log(pic.src);
+              // pic.src = "./img/londonfog.jpg"; //works
+              pic.src = request.result.picture; //doesn't work
 
               //event details
               var eventDetails = document.getElementById('event-details');
@@ -174,7 +175,7 @@ function onLoad() {
         console.log("No support...");
       } 
       if(indexedDBSupport) {
-        var favDB = indexedDB.open(["user_favorites"], 1);
+        var favDB = indexedDB.open(["user_favorites"], 2);
         var db;
 
         favDB.onsuccess = function(e) {
@@ -205,7 +206,7 @@ function onLoad() {
               event_data.innerHTML = cursor.value.details;
               eventData.appendChild(event_data);
 
-              var btnToUnfavorite = ons._util.createElement("<ons-button modifier='outline' class='unfavorite-btn' style='color: #E32227; border-color: #E32227'><i class='fas fa-heart-broken'></i> Unfavorite</ons-button>");
+              var btnToUnfavorite = ons._util.createElement("<ons-button modifier='outline' class='unfavorite-btn' style='color: #9B2335; border-color: #9B2335'><i class='fas fa-heart-broken'></i> Unfavorite</ons-button>");
               btnToUnfavorite.addEventListener("click", removeFavorite2);
               eventData.appendChild(btnToUnfavorite);
 
@@ -245,7 +246,7 @@ function onLoad() {
     } 
 
     if(indexedDBSupport) {
-      var openDB = indexedDB.open("user_favorites", 1);
+      var openDB = indexedDB.open("user_favorites", 2);
       var db;
       
       openDB.onupgradeneeded = function(e) {
@@ -297,7 +298,7 @@ function onLoad() {
     } 
 
     if(indexedDBSupport) {
-      var openDB = indexedDB.open("user_favorites", 1);
+      var openDB = indexedDB.open("user_favorites", 2);
       var db;
       
       openDB.onupgradeneeded = function(e) {
@@ -371,7 +372,7 @@ function onLoad() {
 }
 
 var checkIfFavorited = (date) => {
-  var openDB = indexedDB.open("user_favorites", 1);
+  var openDB = indexedDB.open("user_favorites", 2);
   var db;
 
   openDB.onupgradeneeded = function(e) {
@@ -398,17 +399,13 @@ var checkIfFavorited = (date) => {
       var cursor = e.target.result;
       console.log(`Cursor date: ${cursor.value.date}. Date: ${date}.`);
 
-      //area that needs work
       if(cursor.value.date === date){
         console.log("Event is already a favorite.");
-        // var fav_btn = document.getElementById('favorite-btn');
-        // fav_btn.style.display = "none";
         document.getElementById("favorite-btn").style.display = "none";
         document.getElementById("unfavorite-btn").style.display = "inline";
       } else{
         console.log("No favorites!")
       }
-      //end of area that needs work
     }
 
     favRequest.onerror = e => {
@@ -434,18 +431,9 @@ var removeFavorite2 = () => {
   } 
 
   if(indexedDBSupport) {
-    var openDB = indexedDB.open("user_favorites", 1);
+    var openDB = indexedDB.open("user_favorites", 2);
     var db;
     var date = "12-05";
-    
-    // openDB.onupgradeneeded = function(e) {
-    //   console.log("DB upgrade...");
-    //   db = e.target.result;
-    //   if(!db.objectStoreNames.contains("favorite_events")) {
-    //       db.createObjectStore("favorite_events");
-    //       console.log(`new object store created... ${db.name}`);
-    //     }
-    // }
     
     openDB.onsuccess = function(e) {
       alert("Removed from favorites!");
@@ -469,110 +457,4 @@ var removeFavorite2 = () => {
 }
 
 onLoad();
-
-
-
-
-
-
-
-// document.addEventListener('init', function(event) {
-
-//   var page = event.target;
-
-// });
-
-// window.fn = {};
-
-// window.fn.open = function() {
-//   var menu = document.getElementById('menu');
-//   menu.open();
-// };
-
-// window.fn.load = function(page) {
-
-//   if(page == "events.html"){
-//     console.log("This is the events page!");
-
-//     //set variable for IndexedDB support
-//     var indexedDBSupport = false; //check IndexedDB support 
-//     if("indexedDB" in window) {
-//       indexedDBSupport = true;
-//       console.log("IndexedDB supported...");
-//     } else {
-//     console.log("No support...");
-//     } 
-
-//     if(indexedDBSupport) {
-//       var openDB = indexedDB.open("history_app", 1);
-//       openDB.onupgradeneeded = function(e) {
-//           console.log("DB upgrade...");
-//           //local var for db upgrade
-//           var upgradeDB = e.target.result;
-//           if (!upgradeDB.objectStoreNames.contains("events")) {
-//               upgradeDB.createObjectStore("events");
-//               console.log("new object store created...");
-//           }
-//       }
-      
-//       openDB.onsuccess = function(e) {
-//           console.log("DB success...");
-
-//           events_arr = [
-//             {
-//             title: "Test Title 1/3",
-//             date: "05-01",
-//             details: "This is test event #1 of 3"
-//             },
-//             {
-//             title: "Test Title 2/3",
-//             date: "05-02",
-//             details: "This is test event #2 of 3"
-//             },
-//             {
-//             title: "Test Title 3/3",
-//             date: "05-03",
-//             details: "This is test event #3 of 3"
-//             }
-//           ]
-
-//           db = e.target.result;
-//           var dbTransaction = db.transaction(["events"],"readwrite");
-//           var dataStore = dbTransaction.objectStore("events");
-//           var addRequest;
-
-//           events_arr.forEach(event => {
-//             addRequest = dataStore.add(event,event.date);
-//           })
-
-//           // success handler
-//           addRequest.onsuccess = function(e) { 
-//             console.log("data stored...");
-//           }
-//           // error handler
-//           addRequest.onerror = function(e) { 
-//             console.log(e.target.error.name); // handle error...
-//           }
-//       }
-      
-//       openDB.onerror = function(e) {
-//           console.log("DB error...");
-//           console.dir(e);
-//       }
-//     }
-
-
-//   }
-
-//   var content = document.getElementById('content');
-//   var menu = document.getElementById('menu');
-//   content.load(page)
-//     .then(menu.close.bind(menu));
-// };
-
-// window.fn.myAlert = function(){
-//   var fav_btn = document.getElementById('favorite-btn');
-//   alert("Added to favorites!");
-//   fav_btn.innerHTML = "<i class='fas fa-heart-broken'></i> Unfavorite";
-// }
 
